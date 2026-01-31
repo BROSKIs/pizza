@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Icon -->
     <link rel="icon" href="img/favicon.webp">
+    <!-- StyleSheet -->
     <link rel="stylesheet" href="styles/pizza-style.css">
+    <!-- TItle -->
     <title>Poppa's pizza</title>
+    <!-- JavaScript -->
+    <script src="pizza.js" defer></script>
 </head>
 <body>
     <main>
@@ -21,16 +26,18 @@
             <!--Contact Info-->
             <fieldset>
                 <legend>Contact Info</legend>
-                <label for="fname">First Name:</label>
+                <label for="fname">First Name: <span class="err" id="err-fname">First Name is Required</span></label>
                 <input type="text" id="fname" name="fname">
-                <label for="lname">Last Name:</label>
+                <label for="lname">Last Name: <span class="err" id="err-lname">Last Name is Required</span></label>
                 <input type="text" id="lname" name="lname">
-                <label for="email">Email Address:</label>
+                <label for="email">Email Address: <span class="err" id="err-email">Email is Required</span></label>
                 <input type="text" id="email" name="email">
             </fieldset>
             <!--Delivery type-->
             <fieldset>
                 <legend>Select Pick Up or Delivery</legend>
+                <span class="err" id="err-method">Please select pick up or deliver</span>
+                <span class="err" id="err-email">Select Method</span>
                 <label for="pickup">
                     <input type="radio" id="pickup" name="method" value="pickup">
                     Pick Up
@@ -66,6 +73,7 @@
             <!--Pizza size-->
             <fieldset>
                 <legend>Pizza Size</legend>
+                <span class="err" id="err-size">Please select size</span>
                 <select name="size" id="size">
                     <option value="none">-- Select a size --</option>
                     <option value="small">Small</option>
@@ -83,7 +91,6 @@
             <!--SUBMIT BUTTON-->
             <button type="submit" id="order-button">Place Order</button>
         </form>
-        <script src="pizza.js"></script>
     </main>
 </body>
 </html>
