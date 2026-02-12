@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true}));
 const orders = [];
 
 //Home Page
-app.get("/", (req,res)=>{
+app.get('/', (req,res)=>{
     res.sendFile(`${import.meta.dirname}/views/home.html`);
 });
 //contact us form
