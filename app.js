@@ -4,6 +4,9 @@ const app = express();
 
 const PORT = 3000;
 
+//Set EJS as the view engine
+app.set("view engine", "EJS");
+
 //"Middlewear" that allows express to read
 //form data and store it in req.body
 app.use(express.static('public'));
@@ -14,11 +17,11 @@ const orders = [];
 
 //Home Page
 app.get('/', (req,res)=>{
-    res.sendFile(`${import.meta.dirname}/views/home.html`);
+    res.render("home");
 });
 //contact us form
 app.get("/contact-us", (req,res)=>{
-    res.sendFile(`${import.meta.dirname}/views/contact.html`);
+    res.render("contact")
 });
 //Submit response
 app.post("/submit-order", (req,res)=>{
@@ -28,6 +31,7 @@ app.post("/submit-order", (req,res)=>{
         fname: req.body.fname,
         lname: req.body.lname,
         email: req.body.email,
+        method: req.body.method,
         toppings: req.body.toppings ? req.body.toppings: "none",
         size: req.body.size,
         comment: req.body.comment,
@@ -35,12 +39,12 @@ app.post("/submit-order", (req,res)=>{
     }
     //push orders
     orders.push(order);
-    res.sendFile(`${import.meta.dirname}/views/confirmation.html`);
+    res.render("confirmation", { order });
 });
 
 //contact us form
 app.get("/admin", (req,res)=>{
-    res.send(orders);
+    res.render("admin", { orders });
 });
 
 app.listen(PORT, ()=>{
