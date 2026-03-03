@@ -1,4 +1,5 @@
 import express from "express";
+import mysql2 from "mysql2";
 
 const app = express();
 
@@ -14,6 +15,24 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true}));
 //create temp array to store orders
 const orders = [];
+
+//DATABASE 
+//create a pool bucket of database connections
+const pool = mysql2.createPool({
+    host: '137.184.36.197',
+    user: 'admin',
+    port: 3306
+}).promise();
+
+
+app.get('/db-test', async(req, res)=>{
+    try{
+        const pizza_orders = await pool.query('SELECT * FROM orders');
+        res.send(pizza_orders[0]);
+    }catch(err){
+        console.error("Database error: ", err);
+    }
+});
 
 //Home Page
 app.get('/', (req,res)=>{
